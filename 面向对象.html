@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>面向对象小矮人</title>
+    <script src="js/sprite.js"></script>
+</head>
+<body>
+    <canvas id="demo">
+        你的浏览器不支持，请升级
+    </canvas>
+    <button id="btn-dir-left">←</button>
+    <button id="btn-dir-right">→</button>
+    <button id="btn-dir-up">↑</button>
+    <button id="btn-dir-down">↓</button>
+<script>
+    (function () {
+        var canvas = document.getElementById("demo");
+        var ctx = canvas.getContext("2d");
+        canvas.width = 600;
+        canvas.height = 600;
+        canvas.style.border = "1px solid #000";
+        var s = new Sprite({
+            x : 300,
+            y : 300,
+            w : 80,
+            h : 130,
+            fps :10,
+            originW : 40,
+            originH : 65,
+            imgSrc : 'imgs/gameImgs/DMMban.png'
+        });
+        s.render(ctx);
+        var btnLeft = document.getElementById('btn-dir-left');
+        btnLeft.onclick = function() {
+            //小哥哥朝着左方向
+            // dirIndex = 1;
+            s.changeDir('left');
+        };
+
+        var btnRight = document.getElementById('btn-dir-right');
+        btnRight.onclick = function() {
+            //小哥哥朝着方向
+            // dirIndex = 2;
+            s.changeDir('right');
+
+        };
+
+        var btnUp = document.getElementById("btn-dir-up");
+        btnUp.onclick = function() {
+            //小哥哥朝着左方向
+            // dirIndex = 3;
+            s.changeDir('up');
+
+        };
+
+        var btnDown = document.getElementById('btn-dir-down');
+        btnDown.onclick = function() {
+            //小哥哥朝着左方向
+            // dirIndex = 0;
+            s.changeDir('down');
+
+        };
+    }())
+</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <canvas id="demo"></canvas>
+    <button id="btn-dir-left">左</button>
+    <button id="btn-dir-right">右</button>
+    <button id="btn-dir-up">上</button>
+    <button id="btn-dir-down">下</button>
+    <script>
+        (function () {
+           var canvas = document.getElementById("demo");
+            var ctx = canvas.getContext("2d");
+            var maxHeight = 300;
+            var maxWidth = 300;
+            /*var x0 =100;
+            var y0 =100;*/
+
+            ctx.beginPath();
+            ctx.strokeStyle = 'green';
+            canvas.width = 600;
+            canvas.height = 600;
+            canvas.style.border = "1px solid red";
+            ctx.beginPath();
+            ctx.moveTo(100,400);
+            ctx.lineTo(100,100);
+            ctx.lineTo(90,120);
+            ctx.moveTo(100,100);
+            ctx.lineTo(110,120);
+            ctx.strokeStyle = "purple";
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(100,400);
+            ctx.lineTo(400,400);
+            ctx.lineTo(380,390);
+            ctx.moveTo(400,400);
+            ctx.lineTo(380,410);
+            ctx.strokeStyle = "green";
+            ctx.stroke();
+            ctx.beginPath();
+            var data = [.1,.6,.8,.7,.4,.6];
+            var spaceWidth = maxWidth/(data.length+1);
+            for(var i = 0; i < data.length; i++){
+                var x = 100 + spaceWidth*(i+1);
+                var y = 400 - maxHeight * data[i];
+                ctx.lineTo(x,y);
+                ctx.strokeStyle = "blue";
+                ctx.stroke();
+            }
+        }())
+    </script>
+</body>
+</html>

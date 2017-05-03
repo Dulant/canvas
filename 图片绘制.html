@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--设置canvas标签的宽高是通过canvas标签的属性进行设置，
+不要用css去设置-->
+<canvas id="demo" width = "600" height = "600">
+    <!--ie9以上才支持canvas
+    你的浏览器不支持canvas,请升级浏览器
+    如果不支持canvas，里面一个会用flash来代替-->
+</canvas>
+<script>
+    (function () {
+        var canvas = document.getElementById("demo");
+        var ctx = canvas.getContext("2d");
+        canvas.style.border = '1px solid #000';
+        canvas.width = 600;
+        canvas.height = 600;
+
+        // 第一步：创建图片的dom对象
+        var img = new Image();
+            img.src = 'imgs/gameImgs/DMMban.png';
+            img.onload = function () {
+                var frameIndex = 0;
+                setInterval(function () {
+                    ctx.clearRect(0,0,canvas.width,canvas.height);
+                    ctx.drawImage(img,frameIndex*40,0,40,65,200,200,80,130);
+                    frameIndex++;
+                   /* if(frameIndex > 3){
+                        frameIndex = 0;
+                    }*/
+                    frameIndex %= 4;
+                },1000/10);/*10帧，100毫秒绘制一动作*/
+                /*ctx.drawImage(img,40,65,40,65,300,300,40,65);*/
+            }
+
+
+    }());
+
+    
+
+   
+</script>
+</body>
+</html>

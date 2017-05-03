@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <!--设置canvas标签的宽高是通过canvas标签的属性进行设置，
+    不要用css去设置-->
+    <canvas id="demo" width = "600" height = "600">
+        <!--ie9以上才支持canvas
+        你的浏览器不支持canvas,请升级浏览器
+        如果不支持canvas，里面一个会用flash来代替-->
+    </canvas>
+    <script>
+        // 第一步：拿到canvas的标签
+        var canvas = document.getElementById("demo");
+        canvas.style.border = '1px solid red';
+        canvas.width = 600;
+        canvas.height = 600;
+       // canvas.style.height = 1200; 千万不能这样玩，否则又回去了
+        // 第二步：拿到canvas的上下文
+        // 拿到2d上下文 "2d"
+        // 拿到3d上下文 "webgl"
+        var ctx = canvas.getContext("2d");
+
+        // 第三步：开始绘制
+        // moveTo(x0,y0);第一个参数是X点的坐标，第二个左边是Y点的坐标
+        ctx.moveTo(100,100); // 把画笔移动到100，100点
+        ctx.lineTo(200,100); // 从画笔的位置画一条直线到200,100点
+        ctx.lineTo(100,200); // 从当前位置。再画一条直线到100,200点
+        // ctx.lineTo(100,100);
+        ctx.closePath(); // 闭合路径
+        // 设置线宽
+        ctx.lineWidth = 4;
+        // 设置描边的样式
+        ctx.strokeStyle = 'red'; // 跟上颜色，rgb(),rgba(),red #888;
+        ctx.stroke(); // stroke：描边的意思
+        ctx.fillStyle = 'green';
+        // 进行填充的工作
+        ctx.fill();
+    </script>
+</body>
+</html>

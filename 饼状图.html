@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Title123</title>
+    <script src="bower_components/konva/konva.min.js"></script>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+        background-color: #f0f0f0;
+        overflow: hidden;
+    }
+</style>
+<body>
+<div id="container"></div>
+<script>
+    var stage = new Konva.Stage({
+        container: container,
+        width: window.innerWidth,
+        height: window.innerHeight
+    });
+    var layer = new Konva.Layer();
+    stage.add(layer);
+    var cenX = stage.width()/2;
+    var cenY = stage.height()/2;
+    var data = [
+        { name: "前端", value: .25, color: '#e0e'  },
+        { name: "php",  value: .2,  color: 'orange'},
+        { name: "UI",	value: .3,	color: 'blue'  },
+        { name: "C++",	value: .05,	color: 'green' },
+        { name: "游戏",	value: .1,	color: 'purple'},
+        { name: "Java",	value: .1,	color: 'red'   }
+    ];
+    // 做一个扇形
+    // wedge: 楔型物
+    var x0 = cenX;
+    var y0 = cenY;
+    var tempAngel = -90;
+    data.forEach(function (item,index) {
+        var angle= 360*item.value;
+        var wedge = new Konva.Wedge({
+            x: x0,
+            y: y0,
+            angle: 360*item.value,
+            radius: 100,
+            fill: item.color,
+            rotation:tempAngel
+        });
+        tempAngel +=angle;
+        layer.add(wedge);
+        var textAngle = tempAngel + 1/2 * angle;
+        /*文字部分*/
+        var text = new Konva.Text({
+            x: x0+(100+20)*Math.cos(textAngle*Math.PI/180),
+            y: y0+(100+20)*Math.sin(textAngle*Math.PI/180),
+            text: item.value*100+"%",
+            fill: item.color
+        });
+        if(textAngle>=90&&textAngle<=270){
+            text.x(text.x()-text.width());
+        }
+        layer.add(text);
+    });
+    var cir = new Konva.Circle({
+        x: x0,
+        y: y0,
+        radius: 110,
+        stroke: "#ccc",
+        strokeWidth: 2
+    });
+    layer.add(cir);
+    layer.draw();
+
+
+    var index = 0; // 动画的索引值
+    // 拿到所有的扇形
+    var wedges = layer.find("Wedge");
+    wedges.each(function (item,index) {
+        item.angle(0);
+    });
+    // 绘制动画
+    function animatePie() {
+
+        var item = wedges[index];
+        // 从当前的角度多少开始
+        item.angle(0);
+        item.to({
+            angle:data[index].value*360, // 到哪里结束
+            duration:data[index].value*2,
+            // 当动画结束之后，执行此方法
+            onFinish:function () {
+                index++;
+                if( index >=data.length){
+                    return; //立即结束当前函数
+                }
+                animatePie();
+            }
+        });
+    }
+    animatePie();
+</script>
+</body>
+</html>
